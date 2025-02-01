@@ -1,0 +1,6 @@
+location              = "East US"
+resource_group_name   = "3tier-architecture"
+frontend_name         = "reactjs-app"
+aks_dev_name         = "aks-dev-uat"
+aks_prod_name        = "aks-prod"
+mongodb_name         = "mongodb-cluster"
