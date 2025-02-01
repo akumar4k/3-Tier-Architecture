@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"aks","Source":"./modules/aks","Dir":"modules/aks"},{"Key":"frontend","Source":"./modules/app_service","Dir":"modules/app_service"},{"Key":"mongodb","Source":"./modules/mongodb","Dir":"modules/mongodb"}]}

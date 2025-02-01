@@ -27,7 +27,7 @@ resource "azurerm_kubernetes_cluster" "prod_aks" {
     vm_size    = "Standard_DS3_v2"
   }
 
-  api_server_authorized_ip_ranges = []  # Private AKS (No Public Access)
+  #api_server_authorized_ip_ranges = []  # Private AKS (No Public Access)
 
   identity {
     type = "SystemAssigned"
