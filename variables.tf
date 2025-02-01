@@ -33,3 +33,9 @@ variable "mongodb_name" {
   type        = string
   default     = "mongodb-cluster"
 }
+
+variable "mongodb_password" {
+  description = "MongoDB Password"
+  type        = string
+  sensitive   = true
+}
