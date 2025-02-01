@@ -61,3 +61,12 @@ System Assigned Identity for Authentication
 MongoDB Atlas on Azure CosmosDB
 
 Configured with Session Consistency
+
+
+CI/CD Pipeline to Build & Push to ACR
+You need to set up GitHub Actions or Azure DevOps to:
+
+Build Docker images
+Push them to ACR
+Deploy to App Service (Frontend)
+Deploy to AKS (Backend)
