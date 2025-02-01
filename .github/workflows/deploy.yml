@@ -41,3 +41,5 @@ jobs:
         run: |
           az aks get-credentials --resource-group MyResourceGroup --name dev-aks-cluster
           kubectl apply -f backend/kubernetes/deployment.yaml
+          kubectl apply -f backend/kubernetes/service.yaml
+          kubectl apply -f backend/kubernetes/ingress.yaml
