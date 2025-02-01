@@ -70,3 +70,20 @@ Build Docker images
 Push them to ACR
 Deploy to App Service (Frontend)
 Deploy to AKS (Backend)
+
+
+
+
+Run Terraform Deployment
+terraform init
+terraform apply -auto-approve
+
+Push code to GitHub
+Verify Frontend Deployment
+
+az webapp browse --name frontend-app --resource-group MyResourceGroup
+
+Check AKS Deployment
+
+kubectl get pods -n default
+
