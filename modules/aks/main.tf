@@ -1,13 +1,13 @@
-resource "azurerm_kubernetes_cluster" "dev_aks" {
-  name                = var.aks_dev_name
+resource "azurerm_kubernetes_cluster" "aks_dev" {
+  name                = "dev-aks-cluster"
   location            = var.location
   resource_group_name = var.resource_group_name
-  dns_prefix          = "devaks"
+  dns_prefix          = "dev-aks"
 
   default_node_pool {
-    name       = "agentpool"
+    name       = "default"
     node_count = 2
-    vm_size    = "Standard_DS2_v2"
+    vm_size    = "Standard_D2_v2"
   }
 
   identity {
@@ -15,21 +15,24 @@ resource "azurerm_kubernetes_cluster" "dev_aks" {
   }
 }
 
-resource "azurerm_kubernetes_cluster" "prod_aks" {
-  name                = var.aks_prod_name
+resource "azurerm_kubernetes_cluster" "aks_prod" {
+  name                = "prod-aks-cluster"
   location            = var.location
   resource_group_name = var.resource_group_name
-  dns_prefix          = "prodaks"
+  dns_prefix          = "prod-aks"
 
   default_node_pool {
-    name       = "agentpool"
+    name       = "default"
     node_count = 3
-    vm_size    = "Standard_DS3_v2"
-  }
-
-  #api_server_authorized_ip_ranges = []  # Private AKS (No Public Access)
+    vm_size    = "Standard_D2_v2"
+    auto_scaling_enabled = true
+    min_count = 2
+    max_count = 5
+    }
 
   identity {
     type = "SystemAssigned"
   }
+
+  private_cluster_enabled = true
 }
