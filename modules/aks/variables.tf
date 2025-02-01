@@ -21,3 +21,23 @@ variable "aks_prod_name" {
   type        = string
   default     = "aks-prod"
 }
+
+variable "vnet_name" {
+  description = "The name of the virtual network"
+  default     = "aks-vnet"
+}
+
+variable "aks_cluster_name" {
+  description = "The name of the AKS cluster"
+  default     = "aks-private-cluster"
+}
+
+variable "aks_subnet_name" {
+  description = "The name of the subnet for the AKS nodes"
+  default     = "aks-subnet"
+}
+
+variable "private_dns_zone_name" {
+  description = "The DNS zone for the private AKS cluster"
+  default     = "privatelink.eastus.azmk8s.io"
+}
