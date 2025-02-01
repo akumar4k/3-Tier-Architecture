@@ -1,0 +1,43 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to Azure Container Registry
+        run: echo "${{ secrets.ACR_PASSWORD }}" | docker login myacr.azurecr.io -u "${{ secrets.ACR_USERNAME }}" --password-stdin
+
+      - name: Build and Push Frontend
+        run: |
+          docker build -t myacr.azurecr.io/frontend:latest ./frontend
+          docker push myacr.azurecr.io/frontend:latest
+
+      - name: Build and Push Backend
+        run: |
+          docker build -t myacr.azurecr.io/backend:latest ./backend
+          docker push myacr.azurecr.io/backend:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Frontend to App Service
+        run: |
+          az webapp config container set --name frontend-app --resource-group MyResourceGroup \
+          --docker-custom-image-name myacr.azurecr.io/frontend:latest \
+          --docker-registry-server-url https://myacr.azurecr.io \
+          --docker-registry-server-user ${{ secrets.ACR_USERNAME }} \
+          --docker-registry-server-password ${{ secrets.ACR_PASSWORD }}
+
+      - name: Deploy Backend to AKS
+        run: |
+          az aks get-credentials --resource-group MyResourceGroup --name dev-aks-cluster
+          kubectl apply -f backend/kubernetes/deployment.yaml
