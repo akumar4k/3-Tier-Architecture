@@ -29,13 +29,29 @@ variable "aks_prod_name" {
 }
 
 variable "mongodb_name" {
-  description = "MongoDB Instance Name"
+description = "MongoDB Instance Name"
+type        = string
+default     = "mongodb-cluster"
+}
+variable "mongodb_admin_user" {
+  description = "Admin MongoDB user"
   type        = string
-  default     = "mongodb-cluster"
+  sensitive   = true
+}
+
+variable "mongodb_admin_password" {
+  description = "Admin MongoDB password"
+  type        = string
+  sensitive   = true
+}
+
+variable "mongodb_app_user" {
+  description = "Application MongoDB user"
+  type        = string
 }
 
 variable "mongodb_password" {
-  description = "MongoDB Password"
+  description = "Application MongoDB user password"
   type        = string
   sensitive   = true
 }
